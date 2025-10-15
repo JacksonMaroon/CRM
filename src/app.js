@@ -1,8 +1,6 @@
-const { DataStore, PIPELINE_STAGES, ACCOUNT_STATUSES } = (window.AcumenCRM || {});
+const existingCRM = (typeof window !== 'undefined' && window.AcumenCRM) || {};
 
-if (!DataStore) {
-  throw new Error('Acumen CRM core failed to load.');
-const PIPELINE_STAGES = [
+const PIPELINE_STAGES = existingCRM.PIPELINE_STAGES || [
   { id: 'leads', label: 'Leads' },
   { id: 'qualified', label: 'Qualified' },
   { id: 'proposal', label: 'Proposal' },
@@ -11,9 +9,9 @@ const PIPELINE_STAGES = [
   { id: 'closed-lost', label: 'Closed Lost' },
 ];
 
-const ACCOUNT_STATUSES = ['Active', 'Prospect', 'Churned'];
+const ACCOUNT_STATUSES = existingCRM.ACCOUNT_STATUSES || ['Active', 'Prospect', 'Churned'];
 
-class DataStore {
+class DefaultDataStore {
   constructor(storageKey = 'acumen-crm-data') {
     this.storageKey = storageKey;
     this.data = this.load();
@@ -295,6 +293,17 @@ class DataStore {
       .filter((opportunity) => opportunity.stage === stage)
       .reduce((sum, opportunity) => sum + Number(opportunity.value || 0), 0);
   }
+}
+
+const DataStore = existingCRM.DataStore || DefaultDataStore;
+
+if (typeof window !== 'undefined') {
+  window.AcumenCRM = {
+    ...window.AcumenCRM,
+    DataStore,
+    PIPELINE_STAGES,
+    ACCOUNT_STATUSES,
+  };
 }
 
 const store = new DataStore();
