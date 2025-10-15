@@ -1,0 +1,18 @@
+{
+  "name": "acumen-crm",
+  "version": "1.0.0",
+  "description": "Acumen CRM is a lightweight customer relationship management application designed for small teams.",
+  "scripts": {
+    "start": "node scripts/serve.js",
+    "test": "node scripts/smoke-test.js"
+  },
+  "keywords": [
+    "crm",
+    "contacts",
+    "accounts",
+    "opportunities"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs"
+}
