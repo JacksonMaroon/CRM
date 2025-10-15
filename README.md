@@ -21,6 +21,9 @@ The app comes preloaded with realistic sample data so you can explore workflows 
 
 - `npm start` – serve the application locally for development.
 - `npm test` – run a headless smoke test that exercises the data store, relationship integrity, and pipeline stage calculations.
+1. Open `index.html` in a modern browser (Chrome, Edge, Firefox, or Safari).
+2. The app comes preloaded with realistic sample data so you can explore the workflow immediately.
+3. All data you add or modify is stored locally in your browser.
 
 ## Features
 
@@ -41,3 +44,4 @@ localStorage.removeItem('acumen-crm-data');
 ## Browser Support
 
 The application targets evergreen browsers. No build tooling or framework dependencies are required.
+The application targets evergreen browsers with ES modules support. No build step or external dependencies are required.
