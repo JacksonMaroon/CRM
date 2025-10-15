@@ -1,47 +1,55 @@
-# Acumen CRM
+# Atlas CRM
 
-Acumen CRM is a lightweight customer relationship management application designed for small teams. It runs entirely in the browser, persists data with `localStorage`, and provides full CRUD workflows for accounts, contacts, and opportunities.
+A production-ready CRM starter built with React, TypeScript, and Vite. The application manages Accounts, Contacts, and Opportunities with persistent local storage, rich navigation, and a kanban pipeline view for opportunities.
 
-## Getting Started
+## Getting started
 
-You can load the application in two ways:
+```bash
+npm install
+npm run dev
+```
 
-1. **Use the built-in development server (recommended)**
-   ```bash
-   npm start
-   ```
-   This launches a static server on [http://localhost:4173](http://localhost:4173) with proper MIME types so modern browsers load the scripts without security warnings.
+Open http://localhost:5173 to use the app.
 
-2. **Open the static file directly**
-   Open `index.html` in a modern browser (Chrome, Edge, Firefox, or Safari). All assets are relative and require no build step.
+### Available scripts
 
-The app comes preloaded with realistic sample data so you can explore workflows immediately. All data you add or modify is stored locally in your browser.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Vite development server with hot reloading. |
+| `npm run build` | Type-check and bundle the application for production. |
+| `npm run preview` | Preview the production build locally. |
+| `npm test` | Run unit and integration tests with Vitest and Testing Library. |
 
-## Available Scripts
+### Testing
 
-- `npm start` – serve the application locally for development.
-- `npm test` – run a headless smoke test that exercises the data store, relationship integrity, and pipeline stage calculations.
-1. Open `index.html` in a modern browser (Chrome, Edge, Firefox, or Safari).
-2. The app comes preloaded with realistic sample data so you can explore the workflow immediately.
-3. All data you add or modify is stored locally in your browser.
+Tests cover the local-storage backed data services and an end-to-end opportunity creation flow, including validation. Run all tests with:
+
+```bash
+npm test
+```
+
+Vitest is configured for a JSDOM environment, so the React components render as they do in the browser.
 
 ## Features
 
-- Accounts, contacts, and opportunities with bidirectional linking
-- Pipeline board grouped by stage with total value summaries
-- Contextual detail views and relationship navigation
-- Form validation with clear messaging and guardrails
-- Responsive layout that works on desktops and tablets
+- **Entity management:** CRUD flows for accounts, contacts, and opportunities with validation and deletion confirmations.
+- **Relationship-aware navigation:** Accounts surface related contacts and opportunities, with reciprocal links from contact and opportunity detail pages.
+- **Opportunity pipeline:** Kanban board grouped by stage, total open pipeline value, and color-coded status indicators.
+- **Responsive layout:** Sidebar navigation, modern typography, and mobile-friendly grid layouts.
+- **Local persistence:** Data services encapsulate localStorage access for easy backend migration in the future.
+- **Error handling:** Empty states, contextual validation messages, and safeguards against creating opportunities without accounts.
+- **Sample data seed:** On first load, realistic demo data is bootstrapped to showcase the experience.
 
-## Resetting Data
+## Architecture
 
-To start fresh, clear the "Acumen CRM" site data from your browser's storage or run the following in the browser console:
+- `src/data/` encapsulates models, utilities, sample data, and the persistence service.
+- `src/state/DataContext.tsx` exposes global state and CRUD helpers via React context.
+- `src/pages/` contains the routed views for each entity and feature.
+- `src/components/Layout.tsx` defines the primary application shell.
+- Tests live in `src/__tests__/` and cover both services and UI flows.
 
-```js
-localStorage.removeItem('acumen-crm-data');
-```
+## Future enhancements
 
-## Browser Support
-
-The application targets evergreen browsers. No build tooling or framework dependencies are required.
-The application targets evergreen browsers with ES modules support. No build step or external dependencies are required.
+- Connect the data service to a real API or database.
+- Add authentication and user management.
+- Extend reporting with charts and pipeline forecasting.
