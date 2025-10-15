@@ -1,3 +1,7 @@
+const { DataStore, PIPELINE_STAGES, ACCOUNT_STATUSES } = (window.AcumenCRM || {});
+
+if (!DataStore) {
+  throw new Error('Acumen CRM core failed to load.');
 const PIPELINE_STAGES = [
   { id: 'leads', label: 'Leads' },
   { id: 'qualified', label: 'Qualified' },
